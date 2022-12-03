@@ -33,15 +33,10 @@ func main() {
 
 
 func getCalories(list string) int {
-
 	calories := strings.Split(list, "\n")
 
 	var totalCal int
 	for _, calStr := range calories {
-		if calStr == "" {
-			continue
-		}
-
 		cal, err := strconv.Atoi(calStr)
 		if err != nil {
 			log.Fatalf("%s is not a valid calorie value: %s", calStr, err)
