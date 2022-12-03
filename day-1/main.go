@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+    "sort"
 )
 
 func main() {
@@ -16,16 +17,20 @@ func main() {
 
 	calorieLists := strings.Split(string(data), "\n\n")
 
-	var maxCal int
+
+    numReindeer := len(calorieLists)
+    calIntList := make([]int, 0, numReindeer)
 	for _, calList := range calorieLists {
-		newCal := getCalories(calList)
-		if newCal > maxCal {
-			maxCal = newCal
-		}
+        calIntList = append(calIntList, getCalories(calList))
 	}
 
-	fmt.Printf("The max calories is %d\n", maxCal)
+    sort.Ints(calIntList)
+
+    totalMax := calIntList[numReindeer - 1] + calIntList[numReindeer - 2] + calIntList[numReindeer - 3]
+
+	fmt.Printf("The total max calories is %d\n", totalMax)
 }
+
 
 func getCalories(list string) int {
 
